@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <script>
+      //   reduzindo matriz a forma escalonada
+      function PerformOperation(a) {
+        let n = a.length;
+        let i,
+          j,
+          k = 0,
+          aux,
+          flag = 0; // infere o tipo de solução da equação
+
+        // 1° Passo:
+        for (i = 0; i < n; i++) {
+          // loop entre linhas
+          if (a[i][i] == 0) {
+            // elementos pivô
+            // checagem de diagonal
+            aux = 1;
+            while (i + aux < n && a[i + aux][i] == 0) aux++; // procurar elementos != 0 na coluna
+            if (i + aux == n) {
+              flag = 1; // flag auxiliar, sinaliza variável livre
+              break;
+            }
+            //flag permanece 0
+            for (j = i, k = 0; k <= n; k++) {
+              //troca de linhas
+              let temp = a[j][k];
+              a[j][k] = a[j + aux][k];
+              a[j + aux][k] = temp;
+            }
+          }
+
+          for (j = 0; j < n; j++) {
+            // Excluindo i == j
+            if (i != j) {
+              // convertendo matriz para a forma reduzida
+              let p = a[j][i] / a[i][i];
+
+              for (k = 0; k <= n; k++) a[j][k] = a[j][k] - a[i][k] * p;
+            }
+          }
+        }
+        return flag;
+      }
+
+      //checar tipo de existencia
+      function CheckConsistency(a, flag) {
+        let n = a.length;
+        let i, j;
+        let sum;
+
+        // flag == 2: infinitas soluções
+        // flag == 3: sistema impossível
+        flag = 3;
+        for (i = 0; i < n; i++) {
+          sum = 0;
+          for (j = 0; j < n; j++) sum = sum + a[i][j];
+          if (sum == a[i][j]) flag = 2;
+        }
+        return flag;
+      }
+
+      // define o resultado
+      function Solve(a, flag) {
+        let n = a.length;
+        document.write("Resultado: ");
+
+        if (flag == 2) document.write("Sistema Impossível <br>");
+        else if (flag == 3) document.write("Infinitas soluções <br>");
+        // printando soluçoes dividindo as constantes por sua respectiva diagonal
+        else {
+          for (let i = 0; i < n; i++) document.write(a[i][n] / a[i][i] + " ");
+        }
+      }
+
+      // Printando matriz
+      function PrintMatrix(a) {
+        let n = a.length; // ordem
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j <= n; j++) document.write(a[i][j] + " ");
+          document.write("<br>");
+        }
+      }
+
+      //----------------------------------------------------------------------
+      // Teste de Aplicação
+      //----------------------------------------------------------------------
+      let a = [
+        [2, -4, 3, 5],
+        [-6, 12, -9, 4],
+        [4, -8, 6, 10],
+      ];
+
+      // Transformação da matriz
+      let flag = PerformOperation(a);
+
+      if (flag == 1) flag = CheckConsistency(a, flag);
+
+      // print matriz final
+      document.write("Matriz Escalonada: <br>");
+      PrintMatrix(a);
+      document.write("<br>");
+
+      // Soluçoes (se existir)
+      Solve(a, flag);
+
+      //   let a = [
+      //     [0, 2, 1, 4],
+      //     [1, 1, 2, 6],
+      //     [2, 1, 1, 7],
+      //   ];
+      //   let a = [
+      //     [1, 2, 1, 3],
+      //     [2, -3, -1, 4],
+      //     [3, -1, -2, 1],
+      //   ];
+
+      //sistema impossivel
+      //   let a = [
+      //     [2, -4, 3, 5],
+      //     [-6, 12, -9, 4],
+      //     [4, -8, 6, 10],
+      //   ];
+    </script>
+  </body>
+</html>

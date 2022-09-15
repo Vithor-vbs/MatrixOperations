@@ -1,0 +1,79 @@
+<script>
+  // dim == 1 || dim == 2
+
+  var m;
+  var d;
+  const vector = (dim, elements) => {
+    console.log(elements);
+    m = elements;
+    d = dim;
+  };
+
+  //   -----------------------------
+  //   getter
+  //   -----------------------------
+
+  //   var index = parseInt(prompt(`GET: digite uma posição: `));
+  const get = (index) => {
+    for (let i = 0; i < m.length; i++) {
+      if (i === index) {
+        if (d != 1) {
+          let aux = parseInt(
+            prompt(
+              `Por ser uma matriz, digite a posição do elemento desejado na array m[${index}]: `
+            )
+          );
+          for (let j = 0; j < m[i].length; j++) {
+            if (aux === j) {
+              console.log(m[i][j]);
+              return;
+            }
+          }
+        }
+        console.log(m[i]);
+      }
+    }
+  };
+
+  //   -----------------------------
+  //   setter
+  //   -----------------------------
+  const set = (index, value) => {
+    for (let i = 0; i < m.length; i++) {
+      if (i === index) {
+        if (d != 1) {
+          let aux = parseInt(
+            prompt(
+              `Por ser uma matriz, digite a posição do elemento que deseja substituir no array m[${index}]: `
+            )
+          );
+          for (let j = 0; j < m[i].length; j++) {
+            if (aux === j) {
+              m[i][j] = value;
+              console.log(m);
+              return;
+            }
+          }
+        }
+        m[i] = value;
+        console.log(m);
+      }
+    }
+  };
+
+  //   -----------------------------
+  //   testes Console
+  //   -----------------------------
+  vector(1, [1, 2, 3, 4, 5]);
+  get(3);
+  set(4, 10);
+
+  // teste bidimensional
+  vector(2, [
+    [1, 2],
+    [3, 4],
+    [5, 6],
+  ]);
+  get(1); //aux = 1
+  set(1, 10); //aux = 1
+</script>

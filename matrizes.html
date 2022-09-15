@@ -1,0 +1,60 @@
+﻿<script>
+  const Matrix = (rows, cols, elements) => {
+    for (var i = 0; i < rows; i++) {
+      elements[i] = [];
+      document.write("||");
+      for (var j = 0; j < cols; j++) {
+        elements[i][j] = parseInt(
+          prompt("Valor da posição(" + i + ", " + j + ")")
+        );
+        if (j === cols - 1) {
+          document.write(elements[i][j] + "||" + "<br>");
+        } else {
+          document.write(elements[i][j] + " - ");
+        }
+      }
+    }
+  };
+
+  var x = parseInt(prompt("Quantas linhas?"));
+  var y = parseInt(prompt("Quantas colunas?"));
+  var m = [];
+  Matrix(x, y, m);
+
+  // -------------------------------------
+  // getter Function
+  // -------------------------------------
+
+  var i = parseInt(prompt("GET: Qual linha?"));
+  var j = parseInt(prompt("GET: Qual coluna?"));
+
+  const get = (i, j) => {
+    document.write("Get: " + m[i - 1][j - 1] + "<br>");
+  };
+  get(i, j);
+
+  // -------------------------------------
+  // setter Function
+  // -------------------------------------
+
+  var i = parseInt(prompt("SET: Qual linha?"));
+  var j = parseInt(prompt("SET: Qual coluna?"));
+  var value = parseInt(prompt("Qual valor a ser atribuído?"));
+
+  const set = (i, j, value) => {
+    document.write("-------------------" + "<br>");
+
+    m[i - 1][j - 1] = value;
+    for (var i = 0; i < x; i++) {
+      document.write("||");
+      for (var j = 0; j < y; j++) {
+        if (j === y - 1) {
+          document.write(m[i][j] + "||" + "<br>");
+        } else {
+          document.write(m[i][j] + " - ");
+        }
+      }
+    }
+  };
+  set(i, j, value);
+</script>
